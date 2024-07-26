@@ -3,13 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShelbyModels.Api", "ShelbyModels.Api\ShelbyModels.Api.csproj", "{E6B33BBC-036E-4BD2-A0E0-0BD315094B14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShelbyModels.Api", "ShelbyModels.Api\ShelbyModels.Api.csproj", "{E6B33BBC-036E-4BD2-A0E0-0BD315094B14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShelbyModels.Infrastructure", "ShelbyModels.Infrastructure\ShelbyModels.Infrastructure.csproj", "{9D80D259-E9F8-4C4E-8048-BA9C3A936650}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShelbyModels.Application", "ShelbyModels.Application\ShelbyModels.Application.csproj", "{F90427F6-239E-4B58-BC94-BF9F186DB2FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShelbyModels.Application", "ShelbyModels.Application\ShelbyModels.Application.csproj", "{F90427F6-239E-4B58-BC94-BF9F186DB2FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShelbyModels.Domain", "ShelbyModels.Domain\ShelbyModels.Domain.csproj", "{05B3A800-1AFD-4E35-9BB5-3DB78E734944}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShelbyModels.Domain", "ShelbyModels.Domain\ShelbyModels.Domain.csproj", "{05B3A800-1AFD-4E35-9BB5-3DB78E734944}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShelbyModels.Infra", "ShelbyModels.Infra\ShelbyModels.Infra.csproj", "{CB652323-BD53-427E-A867-33673CC5D006}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6F1CBC07-052D-454F-B178-A30B4A140FF0}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +26,6 @@ Global
 		{E6B33BBC-036E-4BD2-A0E0-0BD315094B14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6B33BBC-036E-4BD2-A0E0-0BD315094B14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6B33BBC-036E-4BD2-A0E0-0BD315094B14}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9D80D259-E9F8-4C4E-8048-BA9C3A936650}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9D80D259-E9F8-4C4E-8048-BA9C3A936650}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9D80D259-E9F8-4C4E-8048-BA9C3A936650}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9D80D259-E9F8-4C4E-8048-BA9C3A936650}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F90427F6-239E-4B58-BC94-BF9F186DB2FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F90427F6-239E-4B58-BC94-BF9F186DB2FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F90427F6-239E-4B58-BC94-BF9F186DB2FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +34,10 @@ Global
 		{05B3A800-1AFD-4E35-9BB5-3DB78E734944}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05B3A800-1AFD-4E35-9BB5-3DB78E734944}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05B3A800-1AFD-4E35-9BB5-3DB78E734944}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB652323-BD53-427E-A867-33673CC5D006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB652323-BD53-427E-A867-33673CC5D006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB652323-BD53-427E-A867-33673CC5D006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB652323-BD53-427E-A867-33673CC5D006}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
