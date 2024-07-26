@@ -39,9 +39,9 @@ namespace ShelbyModels.Domain.Entities
         public string ServiceSpecifications { get; set; }
         public string Nationality { get; set; }
 
-        // Optional navigation property for address
+        // Navigation property for addresses        
         public Address Address { get; set; }
-        public int? AddressId { get; set; } // Nullable foreign key
+        public int? AddressId { get; set; } // Nul
     }
 
 }

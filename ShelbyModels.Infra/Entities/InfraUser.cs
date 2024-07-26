@@ -8,6 +8,9 @@ namespace ShelbyModels.Infra.Entities
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }       
         public string ProfileType { get; set; }
         public string SexualOrientation { get; set; }
         public string Gender { get; set; }
@@ -33,7 +36,7 @@ namespace ShelbyModels.Infra.Entities
         public string Nationality { get; set; }
 
         // Optional navigation property for address
-        public int? AddressId { get; set; }
-        public Address? Address { get; set; }
+        public Address Address { get; set; }
+        public int? AddressId { get; set; } // Nullable foreign key
     }
 }
