@@ -16,6 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ShelbyModels.Application\ShelbyModels.Application.csproj" />
+    <ProjectReference Include="..\ShelbyModels.Domain\ShelbyModels.Domain.csproj" />
     <ProjectReference Include="..\ShelbyModels.Infra\ShelbyModels.Infra.csproj" />
   </ItemGroup>
 
