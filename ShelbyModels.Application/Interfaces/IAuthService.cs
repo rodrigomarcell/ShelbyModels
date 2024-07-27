@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Identity;
 namespace ShelbyModels.Application.Interfaces
 {
     public interface IAuthService
-    {
-        Task<IdentityResult> RegisterUserAsync(RegisterUserDto registerUserDto);
-        Task<string?> LoginUserAsync(LoginUserDto loginUserDto);
+    {       
+            public Task<string> LoginAsync(string email, string password);
+            public Task RegisterAsync(string email, string password);        
     }
 }
