@@ -9,12 +9,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShelbyModels.Application", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShelbyModels.Domain", "ShelbyModels.Domain\ShelbyModels.Domain.csproj", "{05B3A800-1AFD-4E35-9BB5-3DB78E734944}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShelbyModels.Infra", "ShelbyModels.Infra\ShelbyModels.Infra.csproj", "{CB652323-BD53-427E-A867-33673CC5D006}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShelbyModels.Infra", "ShelbyModels.Infra\ShelbyModels.Infra.csproj", "{CB652323-BD53-427E-A867-33673CC5D006}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6F1CBC07-052D-454F-B178-A30B4A140FF0}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShelbyModels.Tests", "ShelbyModels.Tests\ShelbyModels.Tests.csproj", "{392D9744-C94A-4169-8BF9-62E0F3B1DF10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{CB652323-BD53-427E-A867-33673CC5D006}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB652323-BD53-427E-A867-33673CC5D006}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB652323-BD53-427E-A867-33673CC5D006}.Release|Any CPU.Build.0 = Release|Any CPU
+		{392D9744-C94A-4169-8BF9-62E0F3B1DF10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{392D9744-C94A-4169-8BF9-62E0F3B1DF10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{392D9744-C94A-4169-8BF9-62E0F3B1DF10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{392D9744-C94A-4169-8BF9-62E0F3B1DF10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
