@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ShelbyModels.Infra.Data;
@@ -6,6 +5,9 @@ using ShelbyModels.Infra.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System;
+using ShelbyModels.Application.Services;
+using ShelbyModels.Application.Interfaces;
 
 namespace ShelbyModels.Api
 {
@@ -15,14 +17,24 @@ namespace ShelbyModels.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            //// Add services to the container.
-            //builder.Services.AddDbContext<AppDbContext>(options =>
-            //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            // Configuração do contexto do banco de dados
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            //builder.Services.AddIdentity<IdentityUserEntity, IdentityRole>()
-            //    .AddEntityFrameworkStores<AppDbContext>()
-            //    .AddDefaultTokenProviders();
+            // Configuração do ASP.NET Core Identity
+            builder.Services.AddIdentity<InfraUser, IdentityRole<int>>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.User.RequireUniqueEmail = true;
+            })
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
 
+            // Configuração da autenticação JWT
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -38,14 +50,18 @@ namespace ShelbyModels.Api
                     };
                 });
 
+            builder.Services.AddScoped<IAuthService, AuthService>();
+            //builder.Services.AddScoped<IUserService, UserService>();
+
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+            // Configuração do Swagger/OpenAPI (opcional)
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // Configuração do pipeline de requisições HTTP
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -53,11 +69,9 @@ namespace ShelbyModels.Api
             }
 
             app.UseHttpsRedirection();
-            
 
             app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.MapControllers();
 
