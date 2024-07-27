@@ -7,6 +7,7 @@ using System;
 
 namespace ShelbyModels.Infra
 {
+    //Program Infra
     internal class Program
     {
         static void Main(string[] args)
@@ -18,14 +19,29 @@ namespace ShelbyModels.Infra
             using (var scope = host.Services.CreateScope())
             {
                 var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                dbContext.Database.Migrate(); // Aplica as migrações pendentes
+                try
+                {
+                    dbContext.Database.Migrate(); // Aplica as migrações pendentes
+                    Console.WriteLine("Migrations applied successfully.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred while applying migrations: {ex.Message}");
+                }
             }
 
-            Console.WriteLine("Migrations applied successfully.");
+            // Manter o console aberto para depuração
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((context, config) =>
+                {
+                    // Certifique-se de que o appsettings.json está sendo carregado
+                    config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                })
                 .ConfigureServices((context, services) =>
                 {
                     // Configuração do DbContext
