@@ -1,21 +1,20 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using ShelbyModels.Domain.Entities; // Referência à camada de domínio
 using System;
+using System.Runtime.CompilerServices;
 
 namespace ShelbyModels.Infra.Entities
 {
     public class InfraUser : IdentityUser<int>
     {
         public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string UserName { get; set; }
-        public string Email { get; set; }
+        public string LastName { get; set; }        
         public string PhoneNumber { get; set; }       
         public string ProfileType { get; set; }
         public string SexualOrientation { get; set; }
         public string Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public int Age { get; set; }
+        public int Age { get; set; }        
         public decimal Height { get; set; }
         public decimal Weight { get; set; }
         public string Ethnicity { get; set; }
