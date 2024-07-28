@@ -50,28 +50,65 @@ namespace ShelbyModels.Tests.Services
         {
             // Arrange
             var email = "test@email.com";
-            var password = "Password123!";
-            _mockUserManager.Setup(um => um.CreateAsync(It.IsAny<InfraUser>(), password))
-                            .ReturnsAsync(IdentityResult.Success);
+            var password = "DynamicPassword123!";
+
+            // Configura o mock para retornar sucesso
+            _mockUserManager.Setup(um => um.CreateAsync(
+                It.Is<InfraUser>(u => u.Email == email),
+                password
+            )).ReturnsAsync(IdentityResult.Success);
 
             // Act
             await _authService.RegisterAsync(email, password);
 
             // Assert
-            _mockUserManager.Verify(um => um.CreateAsync(It.Is<InfraUser>(u => u.Email == email), password), Times.Once);
+            _mockUserManager.Verify(um => um.CreateAsync(
+                It.Is<InfraUser>(u => u.Email == email),
+                password
+            ), Times.Once);
         }
 
+
         [Fact]
-        public async Task RegisterAsync_ShouldThrowExceptionWhenRegistrationFails()
+        public async Task RegisterAsync_ShouldThrowExceptionWhenCreateAsyncFails()
         {
             // Arrange
             var email = "test@email.com";
-            var password = "Password123!";
-            _mockUserManager.Setup(um => um.CreateAsync(It.IsAny<InfraUser>(), password)).ReturnsAsync(IdentityResult.Failed());
+            var password = "DynamicPassword123!";
+
+            // Configura o mock para retornar falha
+            var identityResult = IdentityResult.Failed(new IdentityError { Description = "Error" });
+            _mockUserManager.Setup(um => um.CreateAsync(
+                It.IsAny<InfraUser>(),
+                password
+            )).ReturnsAsync(identityResult);
 
             // Act & Assert
-            await Assert.ThrowsAsync<Exception>(() => _authService.RegisterAsync(email, password));
+            var exception = await Assert.ThrowsAsync<Exception>(() => _authService.RegisterAsync(email, password));
+            Assert.Contains("Failed to register user. Errors: Error", exception.Message);
         }
+
+
+
+
+        [Fact]
+        public async Task RegisterAsync_ShouldPropagateExceptionWhenCreateAsyncThrows()
+        {
+            // Arrange
+            var email = "test@email.com";
+            var password = "DynamicPassword123!";
+
+            // Configura o mock para lançar uma exceção
+            _mockUserManager.Setup(um => um.CreateAsync(
+                It.IsAny<InfraUser>(),
+                password
+            )).ThrowsAsync(new Exception("Test Exception"));
+
+            // Act & Assert
+            var exception = await Assert.ThrowsAsync<Exception>(() => _authService.RegisterAsync(email, password));
+            Assert.Equal("Test Exception", exception.Message);
+        }
+
 
         #endregion
 
