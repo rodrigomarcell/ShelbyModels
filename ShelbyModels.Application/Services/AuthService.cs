@@ -88,7 +88,7 @@ namespace ShelbyModels.Application.Services
 
             try
             {
-                var result = await _userManager.CreateAsync(user, "8S9$&8S98ya9sa#@asdA");
+                var result = await _userManager.CreateAsync(user, password);
 
                 if (!result.Succeeded)
                 {
