@@ -5,9 +5,9 @@ using ShelbyModels.Infra.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using System;
 using ShelbyModels.Application.Services;
 using ShelbyModels.Application.Interfaces;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
 namespace ShelbyModels.Api
 {
@@ -59,6 +59,12 @@ namespace ShelbyModels.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            // Configuração do SPA static files (necessário para produção)
+            builder.Services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/build";
+            });
+
             var app = builder.Build();
 
             // Configuração do pipeline de requisições HTTP
@@ -66,14 +72,37 @@ namespace ShelbyModels.Api
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseSpaStaticFiles();
+            }
+
+            app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();
+
+            //conf pro react servir arquivos staticos em prod
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "ClientApp";
+                if (app.Environment.IsDevelopment())
+                {
+                    spa.UseReactDevelopmentServer(npmScript: "start");
+                }
+            });
 
             app.Run();
         }
