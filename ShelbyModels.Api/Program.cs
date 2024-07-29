@@ -7,7 +7,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using ShelbyModels.Application.Services;
 using ShelbyModels.Application.Interfaces;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
 namespace ShelbyModels.Api
 {
@@ -55,15 +54,21 @@ namespace ShelbyModels.Api
 
             builder.Services.AddControllers();
 
+            // Adicionar configuração de CORS
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowReactApp",
+                    policyBuilder =>
+                    {
+                        policyBuilder.WithOrigins("http://localhost:5173") // Porta padrão do React
+                                     .AllowAnyMethod()
+                                     .AllowAnyHeader();
+                    });
+            });
+
             // Configuração do Swagger/OpenAPI (opcional)
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
-            // Configuração do SPA static files (necessário para produção)
-            builder.Services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/build";
-            });
 
             var app = builder.Build();
 
@@ -80,12 +85,11 @@ namespace ShelbyModels.Api
                 app.UseHsts();
             }
 
+            // Aplicar Middleware de CORS
+            app.UseCors("AllowReactApp");
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseSpaStaticFiles();
-            }
 
             app.UseRouting();
 
@@ -94,15 +98,16 @@ namespace ShelbyModels.Api
 
             app.MapControllers();
 
-            //conf pro react servir arquivos staticos em prod
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "ClientApp";
-                if (app.Environment.IsDevelopment())
-                {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
-                }
-            });
+            // Nota: Não precisamos do middleware UseSpa já que o React está separado
+            // Se você usar o SPA para servir arquivos estáticos, é importante garantir que o caminho está correto
+            //app.UseSpa(spa =>
+            //{
+            //    spa.Options.SourcePath = "ClientApp";
+            //    if (app.Environment.IsDevelopment())
+            //    {
+            //        spa.UseReactDevelopmentServer(npmScript: "start");
+            //    }
+            //});
 
             app.Run();
         }
